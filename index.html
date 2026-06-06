@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Smile Life Mobile — Présentation</title>
+<style>
+  :root{
+    --blue:#0F478C; --blue-d:#0A3460; --ray:#52A6E0;
+    --yellow:#FFC233; --yellow-d:#E8A91E; --teal:#2BB6A3; --coral:#FF6B6B;
+    --ink:#16243a; --card:rgba(255,255,255,.10); --line:rgba(255,255,255,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Nunito',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    color:#fff;overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 18%, #1560B0 0%, rgba(21,96,176,0) 26%),
+      repeating-conic-gradient(from -90deg at 50% 18%, rgba(120,194,242,.40) 0deg 11.25deg, rgba(120,194,242,0) 11.25deg 22.5deg),
+      linear-gradient(180deg,#1A5AA8 0%, var(--blue) 48%, var(--blue-d) 100%);
+    background-attachment:fixed;
+  }
+  .deck{height:100vh;width:100vw;position:relative}
+  .slide{
+    position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;
+    padding:6vh 8vw;animation:fade .4s ease;overflow-y:auto
+  }
+  .slide.active{display:flex}
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @keyframes tapPulseRight{0%,100%{transform:rotate(90deg) scale(1)}50%{transform:rotate(90deg) scale(1.18)}}
+
+  .kick{color:var(--yellow);font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:clamp(11px,1.4vw,15px);margin-bottom:14px}
+  h1{font-size:clamp(30px,6vw,68px);font-weight:900;line-height:1.02;letter-spacing:-.5px}
+  h2{font-size:clamp(24px,4.2vw,46px);font-weight:900;line-height:1.05;margin-bottom:24px}
+  h2 .hl{color:var(--yellow)}
+  .lead{font-size:clamp(15px,2.1vw,23px);opacity:.92;line-height:1.5;max-width:60ch;font-weight:600}
+  .small{opacity:.92;font-size:clamp(12px,1.5vw,16px)}
+
+  ul{list-style:none;margin-top:10px}
+  li{font-size:clamp(14px,2vw,21px);line-height:1.5;padding:9px 0 9px 34px;position:relative;font-weight:600;max-width:62ch}
+  li::before{content:'';position:absolute;left:0;top:16px;width:16px;height:16px;border-radius:50%;background:var(--yellow)}
+  li.x::before{background:var(--coral)}
+  li.ok::before{background:var(--teal)}
+
+  .grid{display:grid;gap:18px;margin-top:8px}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;backdrop-filter:blur(4px)}
+  .card h3{font-size:clamp(16px,2vw,22px);font-weight:900;margin-bottom:6px}
+  .card p{font-size:clamp(13px,1.6vw,17px);opacity:.88;line-height:1.45;font-weight:600}
+  .card .big{font-size:clamp(28px,4vw,46px);font-weight:900;color:var(--yellow);line-height:1}
+  .card.accent{background:rgba(255,194,51,.16);border-color:rgba(255,194,51,.45)}
+  .card.teal{background:rgba(43,182,163,.16);border-color:rgba(43,182,163,.4)}
+  .card ul.feat{margin-top:10px}
+  .card ul.feat li{font-size:clamp(13px,1.6vw,18px);font-weight:600;padding:5px 0 5px 22px;max-width:none;line-height:1.35}
+  .card ul.feat li::before{top:12px;width:9px;height:9px}
+
+  .row{display:flex;gap:30px;align-items:center;flex-wrap:wrap}
+  .grow{flex:1;min-width:300px}
+
+  .stat{display:flex;gap:14px;align-items:baseline}
+  .stat .n{font-size:clamp(26px,4.5vw,52px);font-weight:900;color:var(--yellow)}
+  .stat .l{font-size:clamp(13px,1.6vw,18px);opacity:.85;font-weight:700}
+
+  .phoneframe{flex:0 0 auto;border-radius:30px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.4);border:1px solid var(--line)}
+  iframe{border:0;display:block;background:#0A3460}
+
+  .deal{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px}
+  .deal .big{font-size:clamp(30px,4.6vw,54px)}
+
+  .tbl{width:100%;border-collapse:collapse;max-width:860px;font-size:clamp(13px,1.9vw,21px)}
+  .tbl th,.tbl td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:600}
+  .tbl th{color:var(--yellow);text-transform:uppercase;letter-spacing:1px;font-size:clamp(11px,1.3vw,14px)}
+  .tbl td:nth-child(2),.tbl td:nth-child(3),.tbl th:nth-child(2),.tbl th:nth-child(3){text-align:right;font-weight:800}
+  .tbl tr.tot td{border-top:2px solid var(--yellow);border-bottom:none;font-weight:900;font-size:1.08em;color:#fff;padding-top:14px}
+  .tbl tr.tot td:nth-child(2),.tbl tr.tot td:nth-child(3){color:var(--yellow)}
+
+  /* nav */
+  .nav{position:fixed;bottom:22px;right:26px;display:flex;gap:10px;align-items:center;z-index:20}
+  .nav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.12);color:#fff;font-size:20px;cursor:pointer;font-family:inherit;transition:.15s}
+  .nav button:hover{background:rgba(255,255,255,.25)}
+  .counter{position:fixed;bottom:30px;left:26px;font-weight:800;font-size:14px;opacity:.7;z-index:20}
+  .bar{position:fixed;top:0;left:0;height:4px;background:var(--yellow);z-index:20;transition:width .3s}
+  .hint{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);font-size:12px;opacity:.5;z-index:20}
+  .logo{position:fixed;top:22px;left:26px;font-weight:900;font-size:17px;opacity:.85;z-index:20}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="logo">😊 Smile Life</div>
+<div class="deck" id="deck">
+
+  <!-- 1 — TITRE -->
+  <section class="slide active" style="justify-content:center">
+    <div class="kick">Proposition de partenariat</div>
+    <h1>Smile Life,<br>l'application mobile.</h1>
+    <p class="lead" style="margin-top:22px">Adapter votre jeu en application sans coût, sans charge, et au service de vos ventes physiques.</p>
+    <p class="small" style="margin-top:30px">Jérémy Rolland · Développeur · jeremy.rolland@laposte.net</p>
+  </section>
+
+  <!-- 2 — LE CONSTAT -->
+  <section class="slide">
+    <div class="kick">L'opportunité</div>
+    <h2>Le jeu est <span class="hl">fait</span> pour le mobile.</h2>
+    <div class="row">
+      <div class="grow">
+        <ul>
+          <li>Une partie de temps en temps, pas besoin des yeux rivés à l'écran</li>
+          <li>Stratégie + détente, extensibilité quasi infinie</li>
+          <li>Vous recevez déjà des propositions d'adaptation : la demande existe</li>
+          <li>Une démo complète est <b>déjà développée et jouable</b></li>
+        </ul>
+      </div>
+      <div class="grow">
+        <div class="card accent">
+          <p class="small" style="opacity:.9;color:#fff">Les 40-49 ans : joueurs mobiles les plus actifs au monde</p>
+          <div class="big">23 min/jour</div>
+          <p>et leur genre préféré = <b>Cartes, Plateau &amp; Casual</b>. Exactement votre public.</p>
+          <p class="small" style="margin-top:12px">Segment casual mobile : <b>12 Md$</b> au S1 2025.<br>Sources : adjoe/Statista · AppMagic</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 — LA DÉMO ACTUELLE -->
+  <section class="slide">
+    <div class="kick">Déjà réalisé</div>
+    <h2>Pas un concept, une <span class="hl">démo qui tourne</span>.</h2>
+    <div class="grid g4">
+      <div class="card"><div class="big">2→6</div><p>joueurs supportés</p></div>
+      <div class="card"><div class="big">~180 h</div><p>de développement déjà investies</p></div>
+      <div class="card"><div class="big">100 %</div><p>du jeu de base jouable</p></div>
+      <div class="card"><div class="big">Mobile</div><p>pensé vertical dès le départ</p></div>
+    </div>
+    <p class="lead" style="margin-top:24px">Jeu complet, IA, animations, popups pédagogiques, plateau optimisé pour le tactile. Moteur Godot (celui de Slay the Spire).</p>
+  </section>
+
+  <!-- 4 — LE PRODUIT (mockup live) -->
+  <section class="slide">
+    <div class="kick">Le produit</div>
+    <div class="row">
+      <div class="grow">
+        <h2>Une expérience <span class="hl">soignée</span>, fidèle à votre univers.</h2>
+        <ul>
+          <li>Accueil tourné vers le jeu, pas vers la boutique</li>
+          <li>Encyclopédie des cartes officielles (métiers, malus, spéciales…)</li>
+          <li>Missions, profil, collection de cosmétiques</li>
+        </ul>
+        <div style="margin-top:18px;display:inline-flex;align-items:center;gap:12px;background:rgba(255,194,51,.18);border:1.5px solid rgba(255,194,51,.55);border-radius:16px;padding:12px 16px;font-weight:800;font-size:clamp(13px,1.7vw,17px);color:#fff;max-width:48ch">
+          <span><b style="color:var(--yellow)">Cliquez dans la maquette&nbsp;!</b> C'est une vraie démo interactive. Naviguez entre les écrans.</span>
+          <span style="font-size:26px;display:inline-block;flex-shrink:0;animation:tapPulseRight 1.4s ease-in-out infinite">👆</span>
+        </div>
+      </div>
+      <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:12px">
+        <div class="phoneframe">
+          <iframe src="boutique.html" width="420" height="760" title="Maquette"></iframe>
+        </div>
+        <div style="font-weight:800;color:var(--yellow);font-size:clamp(12px,1.5vw,15px)">Touchez l'écran pour explorer ↑</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 — MODÈLE ÉCO -->
+  <section class="slide">
+    <div class="kick">Modèle économique</div>
+    <h2>Gratuit pour découvrir, <span class="hl">éthique</span> pour monétiser.</h2>
+    <div class="grid g3">
+      <div class="card teal"><h3>🎁 Gratuit</h3><p>Le jeu de base se découvre librement. C'est la vitrine.</p></div>
+      <div class="card"><h3>🎨 Cosmétiques</h3><p>Dos de cartes, thèmes, avatars. Jamais d'avantage de jeu.</p></div>
+      <div class="card accent"><h3>🎴 Extensions = DLC</h3><p>Chaque extension physique devient un pack dans l'app.</p></div>
+    </div>
+    <p class="lead" style="margin-top:24px"><b>Règle d'or :</b> on vend du cosmétique et du contenu officiel pour les passionnés <b>jamais</b> de pay-to-win. L'esprit familial de Smile Life est préservé.</p>
+  </section>
+
+  <!-- 6 — COMPLÉMENTARITÉ -->
+  <section class="slide">
+    <div class="kick">Complémentarité</div>
+    <h2>L'app <span class="hl">alimente</span> la boîte, elle ne la concurrence pas.</h2>
+    <div class="grid g2">
+      <div class="card"><h3>🎲 Le jeu physique</h3><p>La soirée, le présentiel, le cadeau, la collection. Une expérience sociale irremplaçable.</p></div>
+      <div class="card"><h3>📱 L'application</h3><p>Le solo, les transports, le joueur qui n'aurait pas sorti la boîte à ce moment-là.</p></div>
+    </div>
+    <ul style="margin-top:18px">
+      <li class="ok">Découverte gratuite → des milliers de joueurs qui n'achèteraient jamais à l'aveugle</li>
+      <li class="ok">Chaque extension que vous sortez / Evènement = une vitrine dans l'app</li>
+      <li class="ok">QR code dans la boîte / extension → bonus dans l'app : le physique gagne de la valeur</li>
+    </ul>
+  </section>
+
+  <!-- 7 — HÉBERGEMENT / AUTONOMIE -->
+  <section class="slide">
+    <div class="kick">Votre préoccupation n°1</div>
+    <h2>Zéro serveur. Zéro charge. <span class="hl">Zéro souci.</span></h2>
+    <div class="row">
+      <div class="grow">
+        <ul>
+          <li class="ok">Application <b>hors-ligne</b> (solo + IA) : aucun serveur à financer</li>
+          <li class="ok">Distribution assurée par les stores (pas d'hébergement)</li>
+          <li class="ok">Je m'occupe de <b>tout</b> le technique : mises à jour, bugs, support</li>
+          <li class="ok">Rien qui peut « tomber » la nuit et vous stresser</li>
+        </ul>
+      </div>
+      <div class="grow">
+        <div class="card accent" style="text-align:center">
+          <p class="small" style="color:#fff;opacity:.9">Coût récurrent pour vous</p>
+          <div class="big" style="font-size:clamp(40px,7vw,80px)">≈ 100 €<span style="font-size:.4em">/an</span></div>
+          <p>(comptes développeur stores) que je peux même porter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 — BENCHMARK / PREUVE -->
+  <section class="slide">
+    <div class="kick">La preuve par le marché</div>
+    <h2>Le modèle <span class="hl">existe déjà</span> et il marche.</h2>
+    <p class="lead">Mattel a transformé ses jeux de cartes en applications via un studio dédié <b>sans rien développer eux-mêmes</b>, juste en licenciant leur marque.</p>
+    <div class="grid g3" style="margin-top:22px">
+      <div class="card"><h3>UNO!™</h3><div class="big">7 → 35 M$</div><p>de revenus annuels en 2 ans.</p></div>
+      <div class="card"><h3>Phase 10</h3><div class="big">0,5 → 30 M$</div><p>par an (×60) — un jeu de cartes simple.</p></div>
+      <div class="card accent"><h3>Le studio (Mattel163)</h3><div class="big">318 M$</div><p>de valorisation créée.</p></div>
+    </div>
+    <p class="small" style="margin-top:18px">C'est exactement le modèle que je vous propose, à votre échelle.</p>
+  </section>
+
+  <!-- 9 — MONÉTISATION SAINE -->
+  <section class="slide">
+    <div class="kick">Une monétisation à votre image</div>
+    <h2>Généreux pour le joueur, <span class="hl">jamais agressif</span>.</h2>
+    <div class="grid g2">
+      <div class="card teal">
+        <h3>✅ Ce qu'on fait</h3>
+        <ul style="margin-top:4px">
+          <li class="ok" style="padding-left:28px">Cosmétiques & contenu officiel</li>
+          <li class="ok" style="padding-left:28px">Pub uniquement entre les parties, retirable</li>
+          <li class="ok" style="padding-left:28px">Tout débloquable en jouant</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🚫 Ce qu'on ne fait pas</h3>
+        <ul style="margin-top:4px">
+          <li class="x" style="padding-left:28px">Pas de pay-to-win</li>
+          <li class="x" style="padding-left:28px">Pas de loot boxes / gacha</li>
+          <li class="x" style="padding-left:28px">Pas de pub pendant le jeu</li>
+        </ul>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:22px">Référence : <b>Among Us</b> : généreux, 100 % cosmétique, adoré des joueurs.</p>
+  </section>
+
+  <!-- 10 — LA PROPOSITION (DEAL) -->
+  <section class="slide">
+    <div class="kick">La proposition</div>
+    <h2>Vous licenciez, <span class="hl">je fais tout</span> et vous touchez le plus là où c'est votre contenu.</h2>
+    <div class="grid g3">
+      <div class="card"><p class="small" style="color:#fff;opacity:.9">Mes flux</p><h3>Pub &amp; confort</h3><div class="big">10 %</div><p>Pub, retrait de pub → 100 % ma technologie.</p></div>
+      <div class="card"><p class="small" style="color:#fff;opacity:.9">Habillage</p><h3>Cosmétiques</h3><div class="big">15 %</div><p>Dos, thèmes, avatars, monnaie → ma création.</p></div>
+      <div class="card accent"><p class="small" style="color:#fff;opacity:.9">Votre contenu</p><h3>Extensions &amp; image</h3><div class="big">25 %</div><p>DLC, événements officiels → directement votre IP.</p></div>
+    </div>
+    <div class="row" style="margin-top:18px;gap:16px;align-items:stretch">
+      <div class="card teal grow" style="min-width:0;display:flex;flex-direction:column;justify-content:center"><h3>≈ 17 % pour vous, en moyenne</h3><p>Et 0 € de coût, 0 charge, 0 risque. Vous encaissez, je gère tout.</p></div>
+      <div class="card accent" style="flex:0 0 auto;text-align:center;display:flex;flex-direction:column;justify-content:center"><p class="small" style="color:#fff;opacity:.9">Forfait de mise en route</p><div class="big">3 500 €</div></div>
+    </div>
+  </section>
+
+  <!-- 11 — COMMENT SE CALCULE VOTRE PART -->
+  <section class="slide">
+    <div class="kick">Transparence · scénario prudent</div>
+    <h2>Comment se calcule <span class="hl">votre part</span>.</h2>
+    <div class="grid g4" style="margin-bottom:16px">
+      <div class="card"><div class="big">400 000</div><p>boîtes déjà vendues, votre base de fans</p></div>
+      <div class="card"><div class="big">80 000</div><p>joueurs sur l'app (≈ 20 %, via QR + réseaux)</p></div>
+      <div class="card"><div class="big">2 %</div><p>effectuent des achats = 1 600 acheteurs</p></div>
+      <div class="card accent"><div class="big">≈ 40 000 €</div><p>de revenu net total / an*<br><b>dont ≈ 6 800 € pour vous</b></p></div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Flux de revenus</th><th>Votre taux</th><th>Votre part / an</th></tr></thead>
+      <tbody>
+        <tr><td>Pub + retrait de pub</td><td>10 %</td><td>1 200 €</td></tr>
+        <tr><td>Cosmétiques + monnaie</td><td>15 %</td><td>2 100 €</td></tr>
+        <tr><td>Extensions + édition complète</td><td>25 %</td><td>3 500 €</td></tr>
+        <tr class="tot"><td>Votre part totale</td><td>≈ 17 %</td><td>6 800 €</td></tr>
+      </tbody>
+    </table>
+    <p class="small" style="margin-top:14px">*Net = revenu encaissé − commission stores (~30 %). Votre part = ≈ 17 % de ce net (le reste finance le dev, la maintenance et le support à ma charge). Jamais déduit : mon temps de dev. Relevé transparent chaque trimestre.</p>
+  </section>
+
+  <!-- 11 — ROADMAP -->
+  <section class="slide">
+    <div class="kick">Feuille de route</div>
+    <h2>Démarrer simple, <span class="hl">grandir si ça marche</span>.</h2>
+    <div class="grid g3">
+      <div class="card teal"><h3>Phase 1 — Lancement</h3><ul class="feat"><li>Jeu de base complet (solo + IA)</li><li>Tutoriel</li><li>Missions</li><li>Boutique</li><li><b>Hors-ligne · zéro serveur</b></li></ul></div>
+      <div class="card"><h3>Phase 2 — Contenu &amp; langues</h3><ul class="feat"><li>Extensions officielles (DLC)</li><li>Langues (EN, ES, IT, DE…)</li><li>Événements saisonniers</li></ul></div>
+      <div class="card"><h3>Phase 3 — En ligne</h3><ul class="feat"><li>Multijoueur</li><li>Championnat classé</li><li>Season Pass</li><li>Cross-play</li><li><b>Seulement si autofinancé</b></li></ul></div>
+    </div>
+    <p class="lead" style="margin-top:24px">À chaque étape, l'app reste <b>autonome pour vous</b>.</p>
+  </section>
+
+  <!-- 12 — POURQUOI MOI -->
+  <section class="slide">
+    <div class="kick">Pourquoi moi</div>
+    <h2>Des années d'<span class="hl">interfaces</span> et d'<span class="hl">expérience utilisateur</span>.</h2>
+    <ul>
+      <li>Développeur, plusieurs années sur des logiciels à interface graphique pour industriels</li>
+      <li>Orientation <b>mobile-first</b> et ergonomie : c'est ma valeur ajoutée</li>
+      <li>Une démo aboutie qui prouve la capacité d'exécution, pas juste des promesses</li>
+      <li>Joueur de Smile Life : je connais et respecte le jeu</li>
+    </ul>
+  </section>
+
+  <!-- 13 — CONCLUSION -->
+  <section class="slide" style="justify-content:center">
+    <div class="kick">Et maintenant ?</div>
+    <h1>Donnons une seconde vie<br>à Smile Life. 😊</h1>
+    <p class="lead" style="margin-top:22px">Pour vous : un revenu passif, zéro coût, zéro charge et une vitrine permanente pour vos ventes.</p>
+    <div class="card teal" style="margin-top:28px;max-width:560px">
+      <h3>Prochaine étape</h3>
+      <p>Un échange pour caler ensemble le périmètre et le contrat de licence. Je suis disponible quand vous le souhaitez.</p>
+    </div>
+    <p class="small" style="margin-top:24px">Jérémy Rolland · jeremy.rolland@laposte.net</p>
+  </section>
+
+</div>
+
+<div class="bar" id="progress" style="width:0"></div>
+<div class="counter"><span id="cur">1</span> / <span id="tot">13</span></div>
+<div class="hint">← → pour naviguer</div>
+<div class="nav">
+  <button onclick="prev()" aria-label="Précédent">‹</button>
+  <button onclick="next()" aria-label="Suivant">›</button>
+</div>
+
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  document.getElementById('tot').textContent = slides.length;
+  function show(n){
+    i = Math.max(0, Math.min(slides.length-1, n));
+    slides.forEach((s,k)=>s.classList.toggle('active', k===i));
+    document.getElementById('cur').textContent = i+1;
+    document.getElementById('progress').style.width = ((i+1)/slides.length*100)+'%';
+    document.querySelector('.slide.active').scrollTop = 0;
+  }
+  function next(){ show(i+1); }
+  function prev(){ show(i-1); }
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ') { next(); e.preventDefault(); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp') { prev(); e.preventDefault(); }
+    else if(e.key==='Home') show(0);
+    else if(e.key==='End') show(slides.length-1);
+  });
+  show(0);
+</script>
+</body>
+</html>
